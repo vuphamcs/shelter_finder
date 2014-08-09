@@ -8,7 +8,7 @@ class TwilioController < ApplicationController
 
   def messaging
 
-    Guest.find_or_create_by_phone_number(phone_number: params[:From], city: params[:FromCity], state: params[:FromState], zip: params[:FromZip], country: params[:FromCountry] )
+    Guest.create_with(city: params[:FromCity], state: params[:FromState], zip: params[:FromZip], country: params[:FromCountry]).find_or_create_by(phone_number: params[:From])
 
     message_body = params["Body"].downcase.strip
     message = ''
