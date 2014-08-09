@@ -8,6 +8,7 @@ class TwilioController < ApplicationController
 
   def messaging
     message_body = params["Body"].downcase.strip
+    message = ''
 
     if message_body.include?('help')
       Users.where(full: false).first(3).each do |u|
