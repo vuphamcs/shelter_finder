@@ -7,5 +7,7 @@ Rails.application.routes.draw do
   resources :users do
     get :dashboard, on: :member
   end
+
+  match '/donate_success', to: 'users#donate_success'
   resources :guests
 end
