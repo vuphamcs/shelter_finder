@@ -1,11 +1,12 @@
-%h2 Register a shelter
-= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
-  = f.email_field :email, :autofocus => true
-  = f.password_field :password
-  = f.password_field :password_confirmation
-  = f.text_field :name
-  = f.text_field :address
-  = f.text_field :phone
-  %div
-    = f.submit "Register"
-= render "devise/shared/links"
+.row
+  %h2 Register a shelter
+  = form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
+    = f.email_field :email, :autofocus => true
+    = f.password_field :password
+    = f.password_field :password_confirmation
+    = f.text_field :name
+    = f.text_field :address
+    = f.text_field :phone
+    %div
+      = f.submit "Register"
+  = render "devise/shared/links"

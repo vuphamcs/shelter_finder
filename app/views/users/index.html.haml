@@ -1,27 +1,7 @@
 - @users.each do |user|
-  .row.shelter
-    .large-12.columns
-      %strong= user.name
-  .row.shelter
-    .large-3.columns
-      = mail_to user.email
-    .large-3.columns Phone: #{user.phone}
-    .large-6.columns
-  .row.shelter
-    .large-12.columns
-      %strong= user.name
-  %p
-    %strong Email:
-    = user.email
-  %p
-    %strong Address:
-    = user.address
-  %p
-    %strong Phone:
-    = user.phone
-  %p
-    %strong Full:
-    = user.full
+  = render 'shelter', shelter: user
 
 %br/
-= link_to 'Register an organization!', new_user_registration_path, class: 'button center'
+%br/
+.row
+  = link_to 'Register an organization!', new_user_registration_path, class: 'button expand'

@@ -1340,7 +1340,7 @@ $sub-nav-active-cursor: default;
 
 // override for the 'Home' navigation link
 .top-bar .name {
-  font-size: rem-calc(13);
+  font-size: rem-calc(18);
   line-height: 45px; }
 .top-bar .name a {
   font-weight: normal;
@@ -1384,5 +1384,17 @@ section {
   margin-top: 20px;
   }
 .shelter {
-  padding-top: 10px;
+  padding-top: 15px;
+}
+.full-label {
+  @include label(
+    // This options sets label padding
+    $padding:7px 16px 9px,
+    // This option sets label text-size
+    $text-size:15px,
+    // This option sets label background-color
+    $bg:#f04124,
+    // This option sets the radius of the label
+    $radius:4px
+  );
 }
