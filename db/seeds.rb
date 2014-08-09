@@ -5,3 +5,10 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+
+User.create(name: "Sojourner House", address: "85 Rockland St, Roxbury MA, 02119", phone: "(617) 442-0590", full: false)
+
+User.create(name: "St Francis House", address: "39 Boylston St, Boston MA, 02116", phone: "(617) 542-4211", full: false)
+
+User.create(name: "Sojourner House", address: "889 Harrison Ave, Boston MA, 02118", phone: "(617) 442-9322", full: false)
