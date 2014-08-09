@@ -8,6 +8,6 @@ Rails.application.routes.draw do
     get :dashboard, on: :member
   end
 
-  match '/donate_success', to: 'users#donate_success'
+  # match '/donate_success', to: 'users#donate_success'
   resources :guests
 end
