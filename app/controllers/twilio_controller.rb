@@ -10,19 +10,19 @@ class TwilioController < ApplicationController
     message_body = params["Body"].downcase.strip
     message = ''
 
-    if message_body.include?('help')
+    if message_body.include?('shelter')
       Users.where(full: false).first(3).each do |u|
         message << "ID: #{u.id} Name: #{u.name}\n"
       end
 
       message << "Reply with an ID for more info"
 
-    elsif message_body =~ /\A\d+\z/ ? true : false
+    elsif message_body =~ /\A\d+\z/
       Users.where(id: message_body.to_i).first.each do |u|
         message << "Name: #{u.name}, Address: #{u.address}, Phone: #{u.phone}"
       end
     else
-      message << "Send 'help' to list shelters"
+      message << "Send 'shelter' to list shelters"
     end
 
     response = Twilio::TwiML::Response.new do |r|
