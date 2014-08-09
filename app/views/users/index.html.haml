@@ -1,0 +1,23 @@
+%h1 Listing users
+%table
+  %thead
+    %tr
+      %th Name
+      %th Email
+      %th Address
+      %th Phone
+      %th Full
+      %th{:colspan => "3"}
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td= user.name
+        %td= user.email
+        %td= user.address
+        %td= user.phone
+        %td= user.full
+        %td= link_to 'Show', user
+        %td= link_to 'Edit', edit_user_path(user)
+        %td= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'Register an organization!', new_user_registration_path

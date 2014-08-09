@@ -38,6 +38,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'devise'
 
 gem 'haml-rails'
+gem "erb2haml", :group => :development
 
 gem 'foundation-rails'
 gem 'foundation_rails_helper'

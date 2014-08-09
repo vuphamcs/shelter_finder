@@ -1,0 +1,19 @@
+%p#notice= notice
+%p
+  %strong Phone number:
+  = @guest.phone_number
+%p
+  %strong City:
+  = @guest.city
+%p
+  %strong State:
+  = @guest.state
+%p
+  %strong Zip:
+  = @guest.zip
+%p
+  %strong Country:
+  = @guest.country
+= link_to 'Edit', edit_guest_path(@guest)
+|
+\#{link_to 'Back', guests_path}
