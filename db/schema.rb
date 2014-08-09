@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140809182329) do
+ActiveRecord::Schema.define(version: 20140809225832) do
 
   create_table "guests", force: true do |t|
     t.string   "phone_number"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20140809182329) do
     t.string   "country"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "en_route"
   end
 
   create_table "users", force: true do |t|
