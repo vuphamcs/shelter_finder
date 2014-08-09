@@ -21,4 +21,14 @@ ActiveRecord::Schema.define(version: 20140809173809) do
     t.string "country"
   end
 
+  create_table "users", force: true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "address"
+    t.string   "phone"
+    t.boolean  "full"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
 end
