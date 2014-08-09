@@ -14,11 +14,13 @@
 ActiveRecord::Schema.define(version: 20140809182329) do
 
   create_table "guests", force: true do |t|
-    t.string "phone_number"
-    t.string "city"
-    t.string "state"
-    t.string "zip"
-    t.string "country"
+    t.string   "phone_number"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.string   "country"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|
