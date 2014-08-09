@@ -9,15 +9,16 @@ class TwilioController < ApplicationController
   def messaging
     message_body = params["Body"].downcase.strip
 
-    if message_body.contains('help')
+    if message_body.include?('help')
       Users.where(full: false).first(3).each do |u|
         message << "ID: #{u.id} Name: #{u.name}\n"
         message << "Reply with an ID for more info"
       end
 
     elsif message_body =~ /\A\d+\z/ ? true : false
-      user = Users.where(id: message_body.to_i).first
-      message << "Name: #{u.name}, Address: #{u.address}, Phone: #{u.phone}"
+      Users.where(id: message_body.to_i).first.each do |u|
+        message << "Name: #{u.name}, Address: #{u.address}, Phone: #{u.phone}"
+      end
     else
       message << "Send 'help' to (857) 263-2905 to list shelters"
     end
