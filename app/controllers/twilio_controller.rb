@@ -8,7 +8,11 @@ class TwilioController < ApplicationController
 
   def messaging
     response = Twilio::TwiML::Response.new do |r|
-      r.Message "Replying to the message you sent me"
+      Users.where(full: false).first(3).each do |u|
+        message << "#{u.name}, #{u.address}, #{u.phone}\n"
+      end
+
+      r.Message message
     end
 
     render_twiml response
