@@ -17,7 +17,7 @@ class TwilioController < ApplicationController
 
       message << "Reply with an ID for more info"
 
-    elsif message_body =~ /\A\d+\z/
+    elsif message_body =~ /\A\d+\z/ ? true : false
       User.where(id: message_body.to_i).first.each do |u|
         message << "Name: #{u.name}, Address: #{u.address}, Phone: #{u.phone}"
       end
