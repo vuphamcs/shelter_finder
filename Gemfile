@@ -35,6 +35,14 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+gem 'devise'
+
+gem 'haml-rails'
+gem "erb2haml", :group => :development
+
+gem 'foundation-rails'
+gem 'foundation_rails_helper'
+
 gem 'twilio-ruby'
 
 group :production do
