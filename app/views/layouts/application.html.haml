@@ -6,8 +6,11 @@
     %title Shelter Finder
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag "vendor/modernizr"
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
-    = display_flash_messages
-    = yield
-    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    %header
+      = render 'layouts/navigation'
+    %main{role: "main"}
+      = display_flash_messages
+      = yield

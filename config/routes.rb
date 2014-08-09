@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   root to: 'users#index'
   post 'twilio/messaging' => 'twilio#messaging'
 
-  resources :users
+  resources :users do
+    get :dashboard, on: :member
+  end
   resources :guests
 end

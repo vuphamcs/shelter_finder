@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:dashboard, :show, :edit, :update, :destroy]
 
-  before_action :authenticate_user!, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:dashboard, :edit, :update, :destroy]
+
+  skip_before_action :redirect_if_logged_in, only: [:dashboard, :edit, :update, :destroy]
 
   # GET /users
   # GET /users.json
@@ -9,9 +11,7 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
-  # GET /users/1
-  # GET /users/1.json
-  def show
+  def dashboard
   end
 
   # GET /users/new
@@ -44,7 +44,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to polymorphic_path [:dashboard, @user], notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
