@@ -1,17 +1,4 @@
 %p#notice= notice
-%p
-  %strong Name:
-  = @user.name
-%p
-  %strong Email:
-  = @user.email
-%p
-  %strong Address:
-  = @user.address
-%p
-  %strong Phone:
-  = @user.phone
-%p
-  %strong Full:
-  = @user.full
-= link_to 'Edit', edit_user_path(@user)
+= render 'shelter_with_edit', shelter: @user
+
+

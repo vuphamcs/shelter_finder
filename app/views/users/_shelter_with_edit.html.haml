@@ -1,0 +1,21 @@
+.shelter
+  .row
+    .large-4.columns
+      %h4= shelter.name
+    .large-8.columns
+      - if shelter.full
+        .alert.full-label FULL
+  .row
+    .large-12.columns Address: #{shelter.address}
+  .row
+    .large-3.columns Email: #{mail_to shelter.email}
+    .large-3.columns Phone: #{shelter.phone}
+    .large-6.columns
+  .row
+    .large-3.columns
+      .switch.radius
+        %input{id: "#{shelter.full}", type: "checkbox"}
+        %label{for: "#{shelter.full}"} Full
+  .row
+    .small-6.columns
+      %a.button.expand{href: "#{edit_user_path(@user)}"} Edit
