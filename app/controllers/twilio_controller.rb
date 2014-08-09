@@ -7,7 +7,6 @@ class TwilioController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def messaging
-
     Guest.create_with(city: params[:FromCity], state: params[:FromState], zip: params[:FromZip], country: params[:FromCountry]).find_or_create_by(phone_number: params[:From])
 
     message_body = params["Body"].downcase.strip
