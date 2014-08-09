@@ -35,6 +35,8 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+gem 'twilio-ruby'
+
 group :production do
   gem 'rails_12factor'
   gem 'pg'
