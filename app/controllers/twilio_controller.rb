@@ -7,6 +7,9 @@ class TwilioController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def messaging
+
+    Guest.find_or_create_by_phone_number(phone_number: params[:From], city: params[:FromCity], state: params[:FromState], zip: params[:FromZip], country: params[:FromCountry] )
+
     message_body = params["Body"].downcase.strip
     message = ''
 
@@ -18,9 +21,8 @@ class TwilioController < ApplicationController
       message << "Reply with an ID for more info"
 
     elsif message_body =~ /\A\d+\z/ ? true : false
-      User.where(id: message_body.to_i).first.each do |u|
-        message << "Name: #{u.name}, Address: #{u.address}, Phone: #{u.phone}"
-      end
+      u = User.where(id: message_body.to_i).first
+      message << "Name: #{u.name}, Address: #{u.address}, Phone: #{u.phone}"
     else
       message << "Send 'shelter' to list shelters"
     end
