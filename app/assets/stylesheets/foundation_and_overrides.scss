@@ -1338,9 +1338,6 @@ $sub-nav-active-cursor: default;
 
 @import 'foundation';
 
-// import the CSS framework
-@import "foundation";
-
 // override for the 'Home' navigation link
 .top-bar .name {
   font-size: rem-calc(13);
@@ -1379,9 +1376,13 @@ $sub-nav-active-cursor: default;
 // apply styles to HTML elements
 // to make views framework-neutral
 main {
+  padding-top: 15px;
   @include twelve-columns;
   }
 section {
   @extend .row;
   margin-top: 20px;
   }
+.shelter {
+  padding-top: 10px;
+}
