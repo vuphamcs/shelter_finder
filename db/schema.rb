@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140809225832) do
+ActiveRecord::Schema.define(version: 20140810004200) do
 
   create_table "guests", force: true do |t|
     t.string   "phone_number"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20140809225832) do
     t.datetime "updated_at"
     t.boolean  "en_route"
     t.boolean  "possible_shelter_id"
+    t.integer  "en_route_shelter_id"
   end
 
   create_table "users", force: true do |t|

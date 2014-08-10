@@ -2,7 +2,10 @@
   .row
     .large-4.columns
       .row
-        %h3 #{shelter.name}
+        %h3
+          #{shelter.name}
+          - if shelter.full
+            .alert.full-label FULL
       .row Address: #{shelter.address}
       .row Phone: #{shelter.phone}
       .row Email: #{shelter.email}
