@@ -1,4 +1,5 @@
 #TODO: to be re-implemented in hardware
+# http://www.wolframalpha.com/input/?i=4%5E%281-x%2F2%29*%281+-+y%2F120%29+with+x+from+0+to+2+and+y+from+0+to+60
 class Ranker
   TIME_COEFFICIENT = 120
   CONSTANT_OF_AWESOMENESS = 4
