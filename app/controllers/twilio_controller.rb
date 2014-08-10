@@ -13,7 +13,7 @@ class TwilioController < ApplicationController
     message = ''
 
     if message_body.starts_with?('address')
-      guest.address = message_body[6..-1]
+      guest.address = message_body[7..-1]
       guest.save!
       message << User.print_out_shelter_list(guest)
 
