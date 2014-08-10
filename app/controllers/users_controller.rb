@@ -19,7 +19,7 @@ class UsersController < ApplicationController
       guest_address = "#{latitude},#{longitude}"
     end
 
-    sorted_shelters = User.sorted_shelters(guest_address).map!(&:first).reverse!
+    sorted_shelters = User.sorted_shelters(guest_address).reverse!
     unavailable = User.where(full: true).all.map { |u| [u, nil] } # nil dist, don't matter
     @users_with_distances = sorted_shelters + unavailable
   end
