@@ -13,9 +13,7 @@ class TwilioController < ApplicationController
     message = ''
 
     if message_body.include?('shelter')
-      User.where(full: false).first(3).each do |u|
-        message << "ID: #{u.id} Name: #{u.name}\n"
-      end
+      message << User.print_out_shelter_list(3)
 
       message << "Reply with an ID for more info"
 
@@ -23,24 +21,28 @@ class TwilioController < ApplicationController
       u = nil
       if User.all.map(&:id).include?(message_body.to_i)
         u = User.where(id: message_body.to_i).first
+        guest.update_attributes!(possible_shelter_id: u.id)
+
         message << "Name: #{u.name}, Address: #{u.address}, Phone: #{u.phone} \n" if u
         message << "Are you heading over?\n (reply with 'Yes' or 'No')"
 
       else
         message << "Please enter an ID from the Shelter list:  \n \n"
-        User.where(full: false).first(3).each do |u|
-          message << "ID: #{u.id} Name: #{u.name}\n"
-        end
+        message << User.print_out_shelter_list(3)
       end
 
-      
-
     elsif message_body.include?('yes' || 'no')
-      guest.update_attributes(en_route: true)
+      if message_body.length <= 3 
+        if message_body.include?('yes')
+          guest.update_attributes!(en_route: true, en_route_shelter_id: guest.possible_shelter_id)
 
-      message << "Great!  We've notify you if we've reached full occupancy prior to your arrival!"
+          message << "Great!  We've notify you if we've reached full occupancy prior to your arrival!"
+        else       
 
-
+          message << "Ok!  Let us know if you change your mind! \n"
+          message << User.print_out_shelter_list(3)
+        end
+      end
 
     else
       message << "Send 'shelter' to list shelters"
