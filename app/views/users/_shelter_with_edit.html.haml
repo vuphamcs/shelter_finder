@@ -12,10 +12,10 @@
         Full:
         =check_box_tag 'fullSwitch', 'full', shelter.full
       .row
+        %a.button.expand{href: "#{printout_user_path(@user)}"} Printout
     .large-8.columns.show-for-large-up
       %a{href: gmap_link(shelter.address)}
         %img{src: gmap(shelter.address)}
-
 
 :javascript
   $("#fullSwitch").change(function(){
