@@ -45,6 +45,8 @@ gem 'foundation_rails_helper'
 
 gem 'twilio-ruby'
 
+gem 'rqrcode'
+
 group :production do
   gem 'rails_12factor'
   gem 'pg'

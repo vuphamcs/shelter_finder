@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show]
-  before_action :set_user_from_current_user, only: [:dashboard, :edit, :update, :destroy]
+  before_action :set_user_from_current_user, only: [:dashboard, :printout, :edit, :update, :destroy]
 
-  before_action :authenticate_user!, only: [:dashboard, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:dashboard, :printout, :edit, :update, :destroy]
 
-  skip_before_action :redirect_if_logged_in, only: [:dashboard, :edit, :update, :destroy]
+  skip_before_action :redirect_if_logged_in, only: [:dashboard, :printout, :edit, :update, :destroy]
 
   # GET /users
   # GET /users.json
@@ -25,6 +25,12 @@ class UsersController < ApplicationController
   end
 
   def donate_success
+  end
+
+  def printout
+    @qr = RQRCode::QRCode.new( polymorphic_path([@user]), :size => 4, :level => :h )
+
+    render 'printout', layout: false
   end
 
   # POST /users
