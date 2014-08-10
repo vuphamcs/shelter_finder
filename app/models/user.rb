@@ -7,6 +7,27 @@ class User < ActiveRecord::Base
   validates :email, presence: true, format: { with: /\A[\w\.]+@[\w\.]+\z/, message: 'has to be a valid e-mail address' }
   validates :address, presence: true
   validates :phone, presence: true
+  validates :size, presence: true
+
+  def current_interest_level
+    guest_interest_size = Guest.on_route_to_shelter(self.id).count.to_f
+
+    if guest_interest_size > 0
+      (guest_interest_size / size) * 100
+    else
+      0
+    end
+  end
+
+  def current_interest_level_message
+    if current_interest_level < 80
+      "Current Interest Level is below 80%; this shelter is probably a safe bet!"
+    elsif current_interest_level > 80 && current_interest_level < 100
+      "Interest level is approaching the occupancy limit; choose this shelter with caution!"
+    else
+      "More people have stated that they have interest in this shelter than there are spots available; probably not a safe bet!"
+    end
+  end
 
   def notify_guests_of_full_occupancy
     account_sid = 'AC9807796dfa13060ccb409a4c04b49f0b'
@@ -23,6 +44,11 @@ class User < ActiveRecord::Base
         :body => "We've reached full occupancy!\n Alternative(s): #{print_out_shelter_list(3)}"
       )
     end
+  end
+
+
+  def radial_occupancy_progress
+    Guest.on_route_to_shelter(self.id).count
   end
 
 
