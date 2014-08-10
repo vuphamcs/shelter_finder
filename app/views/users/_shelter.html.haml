@@ -22,7 +22,7 @@
       %span.has-tip.tip-bottom.tip-top{class: "[tip-top tip-right] [radius round]", "data-options" => "disable_for_touch:true", "data-tooltip" => "", title: "#{shelter.current_interest_level_message}"}
         .interest_level{data: {interest_percentage: shelter.current_interest_level}}
     .large-3.columns.show-for-large-up
-      %a{href: gmap_link(shelter.address)}
+      %a{href: gmap_link(shelter.address), target: '_blank'}
         %img{src: gmap(shelter.address)}
 
 

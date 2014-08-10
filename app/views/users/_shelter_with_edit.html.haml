@@ -13,9 +13,9 @@
         Full:
         =check_box_tag 'fullSwitch', 'full', shelter.full
       .row
-        %a.button.expand{href: "#{printout_user_path(@user)}"} Printout
+        %a.button.success.radius.small{href: "#{printout_user_path(@user)}"} Printout
     .large-8.columns.show-for-large-up
-      %a{href: gmap_link(shelter.address)}
+      %a{href: gmap_link(shelter.address), target: '_blank'}
         %img{src: gmap(shelter.address)}
 
 :javascript
