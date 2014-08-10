@@ -21,9 +21,9 @@ ActiveRecord::Schema.define(version: 20140810073919) do
     t.string   "country"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "possible_shelter_id"
-    t.integer  "en_route"
+    t.boolean  "en_route"
     t.integer  "en_route_shelter_id"
+    t.integer  "possible_shelter_id"
     t.string   "address"
   end
 
