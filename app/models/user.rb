@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
       @client.account.messages.create(
         :from => '+18572632905',
         :to => guest.phone_number,
-        :body => "We've reached full occupancy!\n Alternative(s): #{User.print_out_shelter_list(3)}"
+        :body => "We've reached full occupancy!\nAlternative(s):\n#{User.print_out_shelter_list(3)}"
       )
     end
   end
