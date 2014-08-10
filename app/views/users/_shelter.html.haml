@@ -9,10 +9,6 @@
       .row
         %strong Address:
         = shelter.address
-      - unless distance.nil?
-        .row
-          %strong Approx distance:
-          = distance['text']
       .row
         %strong Phone:
         = shelter.phone
