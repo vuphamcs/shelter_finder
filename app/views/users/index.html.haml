@@ -1,4 +1,4 @@
 .row
   %h1.text-center{style: "margin-top: 5px; margin-bottom: 20px;"} Text (857) 263-2905 to find a shelter!
-- @users.each do |user|
-  = render 'shelter', shelter: user
+- @users_with_distances.each do |user, distance|
+  = render 'shelter', shelter: user, distance: distance

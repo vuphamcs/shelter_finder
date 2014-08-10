@@ -9,17 +9,19 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
+    guest_address = nil
+
     result = request.location
     latitude = result.data["latitude"].to_d
     longitude = result.data["longitude"].to_d
 
     if latitude != 0 && longitude != 0
-      sorted_shelters = User.sorted_shelters("#{latitude},#{longitude}").map!(&:first).reverse!
-      unavailable = User.where(full: true).all
-      @users = sorted_shelters + unavailable
-    else
-      @users = User.all.order(full: :asc)
+      guest_address = "#{latitude},#{longitude}"
     end
+
+    sorted_shelters = User.sorted_shelters(guest_address).map!(&:first).reverse!
+    unavailable = User.where(full: true).all.map { |u| [u, nil] } # nil dist, don't matter
+    @users_with_distances = sorted_shelters + unavailable
   end
 
   def dashboard
