@@ -12,7 +12,13 @@ class TwilioController < ApplicationController
     message_body = params["Body"].downcase.strip
     message = ''
 
-    if message_body.starts_with?('address')
+    if message_body.starts_with?('hi')
+      message << "Hello!\n"
+    end
+
+    if message_body.starts_with?('thanks')
+      message << "You are important, we love to make your life easier."
+    elsif message_body.starts_with?('address')
       guest.address = message_body[7..-1]
       guest.save!
       message << User.print_out_shelter_list(guest)
@@ -52,7 +58,7 @@ class TwilioController < ApplicationController
       if guest.address
         message << "Send 'address' followed by your current address to find shelters near you.\nYour current address is #{guest.address}. Send 'shelters to get a list of available shelters near you."
       else
-        message << "Send 'address' followed by your current address to find shelters near you\ne.g. 12 Coral Street, Boston MA, 02121. Send 'shelters' to get a list of available shelters."
+        message << "Send 'address' followed by your current address to find shelters near you\ne.g. address 12 Coral Street, Boston MA, 02121. Send 'shelters' to get a list of available shelters."
       end
       message << "\nYour current intent is #{guest.en_route_shelter.name}." if guest.en_route_shelter
     end
