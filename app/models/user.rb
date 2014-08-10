@@ -59,6 +59,25 @@ class User < ActiveRecord::Base
     results["rows"].first["elements"].map { |s| s["distance"] }
   end
 
+  def self.google_directions(origin, destination, mode = 'transit')
+    conn = Faraday.new(:url => 'http://maps.googleapis.com') do |faraday|
+      faraday.request  :url_encoded
+      faraday.response :logger
+      faraday.adapter  Faraday.default_adapter
+    end
+
+    response = conn.get "/maps/api/directions/json?origin=#{URI.encode(origin)}&destination=#{URI.encode(destination)}"
+    directions = JSON.parse(response.body)
+
+    copyright = directions['routes'].first['copyrights']
+
+    include ActionView::Helpers::SanitizeHelper
+
+    result = strip_tags(directions['routes'].first['legs'].map { |d| d['steps'] }.flatten.map { |d| d['html_instructions']}.join("\n"))
+    result << copyright << "\n"
+    result << "This information is highly experimental. Be careful!"
+  end
+
   def radial_occupancy_progress
     Guest.on_route_to_shelter(self.id).count
   end

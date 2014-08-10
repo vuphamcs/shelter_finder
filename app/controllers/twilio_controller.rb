@@ -46,7 +46,7 @@ class TwilioController < ApplicationController
         if message_body.include?('yes')
           guest.update_attributes!(en_route: true, en_route_shelter_id: guest.possible_shelter_id)
 
-          message << "Great! We'll notify you if we've reached full occupancy prior to your arrival!"
+          message << "Great! We'll notify you if we've reached full occupancy prior to your arrival! Send 'directions' for experimental directions."
         else
 
           message << "Ok! Let us know if you change your mind! \n"
@@ -54,6 +54,8 @@ class TwilioController < ApplicationController
         end
       end
 
+    elsif message_body.begins_with?('directions')
+      message << User.google_directions(guest.address, guest.en_route_shelter)
     else
       if guest.address
         message << "Send 'address' followed by your current address to change your current address.\nYour current address is #{guest.address}. Send 'shelters' to get a list of available shelters near you."
