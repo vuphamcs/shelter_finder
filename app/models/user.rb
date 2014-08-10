@@ -80,7 +80,7 @@ class User < ActiveRecord::Base
 
     shelters.each_with_index.map do |u, i|
       message << "ID: #{u.id} Name: #{u.name}\n"
-      message << "Distance: #{distances[i]}" unless distances[i] == 0
+      message << "Distance: #{distances[i]['text']}" unless distances[i] == 0
     end
 
     message
