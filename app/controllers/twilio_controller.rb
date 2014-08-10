@@ -23,8 +23,6 @@ class TwilioController < ApplicationController
       guest.save!
       message << User.print_out_shelter_list(guest)
 
-      message << "Reply with an ID for more info"
-
     elsif message_body.include?('shelters')
       message << User.print_out_shelter_list(guest)
     elsif message_body =~ /\A\d+\z/ ? true : false

@@ -109,6 +109,8 @@ class User < ActiveRecord::Base
       message << "#{u.name}\n"
       message << "Distance: #{distance['text']} " unless distance.nil?
       message << "ID: #{u.id}\n"
+
+      message << "Reply with an ID for more info"
     end
 
     message
