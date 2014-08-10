@@ -22,6 +22,7 @@ class User < ActiveRecord::Base
         :to => guest.phone_number,
         :body => "We've reached full occupancy!\nAlternative(s):\n#{User.print_out_shelter_list(3)}"
       )
+      guest.update_attributes!(en_route_shelter_id: nil)
     end
   end
 
