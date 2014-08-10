@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140810004200) do
+ActiveRecord::Schema.define(version: 20140810021124) do
 
   create_table "guests", force: true do |t|
     t.string   "phone_number"
@@ -22,9 +22,12 @@ ActiveRecord::Schema.define(version: 20140810004200) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "en_route"
-    t.boolean  "possible_shelter_id"
     t.integer  "en_route_shelter_id"
+    t.integer  "possible_shelter_id"
   end
+
+  add_index "guests", ["en_route_shelter_id"], name: "index_guests_on_en_route_shelter_id"
+  add_index "guests", ["possible_shelter_id"], name: "index_guests_on_possible_shelter_id"
 
   create_table "users", force: true do |t|
     t.string   "name"

@@ -7,7 +7,7 @@ class TwilioController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def messaging
-    guest = Guest.create_with(city: params[:FromCity], state: params[:FromState], zip: params[:FromZip], country: params[:FromCountry], en_route: params[:FromEnRoute], possible_shelter_id: params[:FromEnRoute]).find_or_create_by(phone_number: params[:From])
+    guest = Guest.create_with(city: params[:FromCity], state: params[:FromState], zip: params[:FromZip], country: params[:FromCountry]).find_or_create_by(phone_number: params[:From])
 
     message_body = params["Body"].downcase.strip
     message = ''
@@ -24,7 +24,7 @@ class TwilioController < ApplicationController
         guest.update_attributes!(possible_shelter_id: u.id)
 
         message << "Name: #{u.name}, Address: #{u.address}, Phone: #{u.phone} \n" if u
-        message << "Are you heading over?\n (reply with 'Yes' or 'No')"
+        message << "Are you heading over?\n (reply 'yes' or 'no')"
 
       else
         message << "Please enter an ID from the Shelter list:  \n \n"
@@ -32,14 +32,14 @@ class TwilioController < ApplicationController
       end
 
     elsif message_body.include?('yes' || 'no')
-      if message_body.length <= 3 
+      if message_body.length <= 3
         if message_body.include?('yes')
           guest.update_attributes!(en_route: true, en_route_shelter_id: guest.possible_shelter_id)
 
-          message << "Great!  We've notify you if we've reached full occupancy prior to your arrival!"
-        else       
+          message << "Great! We'll notify you if we've reached full occupancy prior to your arrival!"
+        else
 
-          message << "Ok!  Let us know if you change your mind! \n"
+          message << "Ok! Let us know if you change your mind! \n"
           message << User.print_out_shelter_list(3)
         end
       end
