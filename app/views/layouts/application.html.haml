@@ -12,5 +12,6 @@
     %header
       = render 'layouts/navigation'
     %main{role: "main"}
-      = display_flash_messages
+      .row
+        = display_flash_messages
       = yield

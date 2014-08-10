@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20140809225832) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "en_route"
+    t.boolean  "possible_shelter_id"
   end
 
   create_table "users", force: true do |t|
