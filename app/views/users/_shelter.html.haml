@@ -9,6 +9,7 @@
       .row Address: #{shelter.address}
       .row Phone: #{shelter.phone}
       .row Email: #{shelter.email}
+      .row Size: #{shelter.size}
       .row
         .donate-button
           :plain
@@ -17,10 +18,10 @@
               data-name="Donation"
               data-env="sandbox"
           ></script>
-    .large-3.columns.show-for-large-up
-      %span.has-tip.tip-bottom.tip-top{class: "[tip-top tip-right] [radius round]", "data-options" => "disable_for_touch:true", "data-tooltip" => "", title: "#{shelter.current_interest_level_message}"} 
-        .interest_level{data: {interest_percentage: shelter.current_interest_level}}
     .large-5.columns.show-for-large-up
+      %span.has-tip.tip-bottom.tip-top{class: "[tip-top tip-right] [radius round]", "data-options" => "disable_for_touch:true", "data-tooltip" => "", title: "#{shelter.current_interest_level_message}"}
+        .interest_level{data: {interest_percentage: shelter.current_interest_level}}
+    .large-3.columns.show-for-large-up
       %a{href: gmap_link(shelter.address)}
         %img{src: gmap(shelter.address)}
 
