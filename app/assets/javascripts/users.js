@@ -14,11 +14,7 @@ $(function() {
             .value(interest_percentage)
             .render();
     }
-
-    $(function() {
-        $( document ).tooltip();
-      });
   });
-});   
+});
 
-    
+
