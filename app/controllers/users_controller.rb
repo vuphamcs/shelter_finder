@@ -48,6 +48,9 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
+        if @user.full
+          @user.notify_guests_of_full_occupancy
+        end
         format.html { redirect_to polymorphic_path [:dashboard, @user], notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
