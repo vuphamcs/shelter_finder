@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140810050809) do
+ActiveRecord::Schema.define(version: 20140810073919) do
 
   create_table "guests", force: true do |t|
     t.string   "phone_number"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20140810050809) do
     t.boolean  "possible_shelter_id"
     t.integer  "en_route"
     t.integer  "en_route_shelter_id"
+    t.string   "address"
   end
 
   add_index "guests", ["en_route_shelter_id"], name: "index_guests_on_en_route_shelter_id"

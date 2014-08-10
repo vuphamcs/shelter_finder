@@ -47,6 +47,8 @@ gem 'twilio-ruby'
 
 gem 'rqrcode'
 
+gem 'faraday'
+
 gem "d3-rails"
 
 group :production do
