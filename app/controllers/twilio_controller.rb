@@ -47,7 +47,11 @@ class TwilioController < ApplicationController
       end
 
     else
-      message << "Send 'address' followed by your current address to find shelters near you\ne.g. 12 Coral Street, Boston MA, 02121"
+      if guest.address
+        message << "Send 'address' followed by your current address to find shelters near you.\nYour current address is #{guest.address}. Send 'sheleters' to get a list of available shelters near you."
+      else
+        message << "Send 'address' followed by your current address to find shelters near you\ne.g. 12 Coral Street, Boston MA, 02121. Send 'shelters' to get a list of available shelters."
+      end
     end
 
     response = Twilio::TwiML::Response.new do |r|
