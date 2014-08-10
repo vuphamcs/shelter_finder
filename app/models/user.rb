@@ -32,5 +32,7 @@ class User < ActiveRecord::Base
     where(full: false).first(num).each do |u|
       message << "ID: #{u.id} Name: #{u.name}\n"
     end
+
+    message
   end
 end
