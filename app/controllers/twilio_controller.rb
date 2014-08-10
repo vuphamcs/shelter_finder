@@ -19,6 +19,8 @@ class TwilioController < ApplicationController
 
       message << "Reply with an ID for more info"
 
+    elsif message_body.include?('shelters')
+      message << User.print_out_shelter_list(guest)
     elsif message_body =~ /\A\d+\z/ ? true : false
       u = nil
       if User.all.map(&:id).include?(message_body.to_i)
@@ -47,7 +49,12 @@ class TwilioController < ApplicationController
       end
 
     else
-      message << "Send 'address' followed by your current address to find shelters near you\ne.g. 12 Coral Street, Boston MA, 02121"
+      if guest.address
+        message << "Send 'address' followed by your current address to find shelters near you.\nYour current address is #{guest.address}. Send 'shelters to get a list of available shelters near you."
+      else
+        message << "Send 'address' followed by your current address to find shelters near you\ne.g. 12 Coral Street, Boston MA, 02121. Send 'shelters' to get a list of available shelters."
+      end
+      message << "\nYour current intent is #{guest.en_route_shelter.name}." if guest.en_route_shelter
     end
 
     response = Twilio::TwiML::Response.new do |r|
