@@ -47,6 +47,8 @@ gem 'twilio-ruby'
 
 gem 'rqrcode'
 
+gem 'faraday'
+
 group :production do
   gem 'rails_12factor'
   gem 'pg'

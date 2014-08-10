@@ -20,18 +20,43 @@ class User < ActiveRecord::Base
       @client.account.messages.create(
         :from => '+18572632905',
         :to => guest.phone_number,
-        :body => "We've reached full occupancy!\nAlternative(s):\n#{User.print_out_shelter_list(3)}"
+        :body => "We've reached full occupancy!\nAlternative(s):\n#{User.print_out_shelter_list(guest)}"
       )
       guest.update_attributes!(en_route_shelter_id: nil)
     end
   end
 
+  def self.google_distances(origin_address, addresses)
+    conn = Faraday.new(:url => 'http://maps.googleapis.com') do |faraday|
+      faraday.request  :url_encoded
+      faraday.response :logger
+      faraday.adapter  Faraday.default_adapter
+    end
 
-  def self.print_out_shelter_list(num) #use better scope than 'num' later on
+    response = conn.get '/maps/api/distancematrix/json', origins: origin_address, destinations: addresses.join('|'), mode: 'walking'
+    results = JSON.parse(response.body)
+    results["rows"].first["elements"].map { |s| s["distance"] }
+  end
+
+
+  def self.print_out_shelter_list(guest = nil, num = 3) #use better scope than 'num' later on
     message = ""
 
-    where(full: false).first(num).each do |u|
+    shelters = where(full: false).all
+
+    if guest_address = guest.try(:address)
+      distances = google_distances(guest_address, shelters.map(&:address))
+    else
+      distances = shelters.map { |_| 0 }
+    end
+
+    # require 'ranker'
+
+    # shelters.each_with_index.map { |shelter, i| Ranker.score(0, distances[i], shelter.) }
+
+    shelters.each_with_index.map do |u, i|
       message << "ID: #{u.id} Name: #{u.name}\n"
+      message << "Distance: #{distances[i]}" unless distances[i].blank?
     end
 
     message

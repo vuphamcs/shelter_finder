@@ -47,6 +47,8 @@ GEM
       html2haml
     erubis (2.7.0)
     execjs (2.2.1)
+    faraday (0.9.0)
+      multipart-post (>= 1.2, < 3)
     foundation-rails (5.3.3.0)
       railties (>= 3.1.0)
       sass (>= 3.2.0)
@@ -82,6 +84,7 @@ GEM
     mime-types (1.25.1)
     minitest (5.4.0)
     multi_json (1.10.1)
+    multipart-post (2.0.0)
     orm_adapter (0.5.0)
     pg (0.17.1)
     polyglot (0.3.5)
@@ -161,6 +164,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   devise
   erb2haml
+  faraday
   foundation-rails
   foundation_rails_helper
   haml-rails

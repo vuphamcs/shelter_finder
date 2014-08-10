@@ -13,7 +13,7 @@ class TwilioController < ApplicationController
     message = ''
 
     if message_body.include?('shelter')
-      message << User.print_out_shelter_list(3)
+      message << User.print_out_shelter_list(guest)
 
       message << "Reply with an ID for more info"
 
@@ -28,7 +28,7 @@ class TwilioController < ApplicationController
 
       else
         message << "Please enter an ID from the Shelter list:  \n \n"
-        message << User.print_out_shelter_list(3)
+        message << User.print_out_shelter_list(guest)
       end
 
     elsif message_body.include?('yes' || 'no')
@@ -40,7 +40,7 @@ class TwilioController < ApplicationController
         else
 
           message << "Ok! Let us know if you change your mind! \n"
-          message << User.print_out_shelter_list(3)
+          message << User.print_out_shelter_list(guest)
         end
       end
 
