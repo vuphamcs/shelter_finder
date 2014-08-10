@@ -28,7 +28,7 @@ class UsersController < ApplicationController
   end
 
   def printout
-    @qr = RQRCode::QRCode.new( polymorphic_url([@user]), :size => 4, :level => :h )
+    @qr = RQRCode::QRCode.new( polymorphic_url([@user]), :size => 10, :level => :h )
 
     render 'printout', layout: false
   end
