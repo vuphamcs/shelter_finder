@@ -80,7 +80,7 @@ class User < ActiveRecord::Base
 
     sorted_shelters = shelters_with_scores.sort_by(&:second).map(&:first).last(num)
 
-    sorted_shelters.each do |u|
+    sorted_shelters.each_with_index.map do |u, i|
       message << "ID: #{u.id} Name: #{u.name}\n"
       message << "Distance: #{distances[i]['text']}\n" unless distances[i] == 0
     end
