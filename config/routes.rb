@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     get :printout, on: :member
   end
 
+  resources :about
+
   # match '/donate_success', to: 'users#donate_success'
   resources :guests
 end
