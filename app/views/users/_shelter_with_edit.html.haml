@@ -4,8 +4,7 @@
       .row
         %h3
           #{shelter.name}
-          - if shelter.full
-            .alert.full-label FULL
+          .alert.full-label#full FULL
       .row Address: #{shelter.address}
       .row Phone: #{shelter.phone}
       .row Email: #{shelter.email}
@@ -29,6 +28,10 @@
       data: {user:{full: checked}},
       dataType: "json",
       success: function(){
+      if(checked)
+        $("#full").show();
+      else
+        $("#full").hide();
         fullSwitch.disabled = false;
       }
     })
