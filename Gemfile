@@ -52,6 +52,8 @@ gem 'faraday'
 
 gem "d3-rails"
 
+gem 'geocoder'
+
 group :production do
   gem 'rails_12factor'
   gem 'pg'

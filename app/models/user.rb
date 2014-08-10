@@ -63,21 +63,25 @@ class User < ActiveRecord::Base
     Guest.on_route_to_shelter(self.id).count
   end
 
-  def self.print_out_shelter_list(guest = nil, num = 3) #use better scope than 'num' later on
-    message = ""
-
+  def self.sorted_shelters(guest_address)
     shelters = ::User.where(full: false).all
 
     require 'ranker'
 
-    if guest_address = guest.try(:address)
+    if guest_address
       distances = ::User.google_distances(guest_address, shelters.map(&:address))
       shelters_with_scores = shelters.each_with_index.map { |shelter, i| [[shelter, distances[i]], Ranker.score(0, shelter.current_interest_level / 100, distances[i]['value'].to_i)] }
     else
       shelters_with_scores = shelters.each_with_index.map { |shelter, i| [[shelter, nil], Ranker.score(0, shelter.current_interest_level / 100, 0)] }
     end
 
-    sorted_shelters = shelters_with_scores.sort_by(&:second).map(&:first).last(num).reverse
+    shelters_with_scores.sort_by(&:second).map(&:first).last(num).reverse
+  end
+
+  def self.print_out_shelter_list(guest = nil, num = 3) #use better scope than 'num' later on
+    message = ""
+
+    sorted_shelters = ::User.sorted_shelters(guest.try(:address))
 
     message << "List of nearby available shelters:\n"
 

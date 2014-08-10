@@ -9,7 +9,17 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all.order(full: :asc)
+    result = request.location
+    latitude = result.data["latitude"].to_d
+    longitude = result.data["longitude"].to_d
+
+    if latitude != 0 && longitude != 0
+      sorted_shelters = User.sorted_shelters("#{latitude},#{longitude}").map!(&:first).reverse!
+      unavailable = User.where(full: true).all
+      @users = sorted_shelters + unavailable
+    else
+      @users = User.all.order(full: :asc)
+    end
   end
 
   def dashboard
