@@ -74,11 +74,13 @@ class User < ActiveRecord::Base
       distances = shelters.map { |_| 0 }
     end
 
-    # require 'ranker'
+    require 'ranker'
 
-    # shelters.each_with_index.map { |shelter, i| Ranker.score(0, distances[i], shelter.) }
+    shelters_with_scores = shelters.each_with_index.map { |shelter, i| [shelter, Ranker.score(0, shelter.current_interest_level / 100, distances[i]['value'].to_i)] }
 
-    shelters.each_with_index.map do |u, i|
+    sorted_shelters = shelters_with_scores.sort_by(&:second).map(&:first).last(num)
+
+    sorted_shelters.each do |u|
       message << "ID: #{u.id} Name: #{u.name}\n"
       message << "Distance: #{distances[i]['text']}\n" unless distances[i] == 0
     end
