@@ -12,7 +12,7 @@ class TwilioController < ApplicationController
     message_body = params["Body"].downcase.strip
     message = ''
 
-    if message_body.include?('shelter')
+    if message_body.include?('address')
       message << User.print_out_shelter_list(3)
 
       message << "Reply with an ID for more info"
@@ -45,7 +45,7 @@ class TwilioController < ApplicationController
       end
 
     else
-      message << "Send 'shelter' to list shelters"
+      message << "Send 'address' followed by your current address to find shelters near you\ne.g. 12 Coral Street, Boston MA, 02121"
     end
 
     response = Twilio::TwiML::Response.new do |r|
