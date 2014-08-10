@@ -18,6 +18,9 @@
         %img{src: gmap(shelter.address)}
 
 :javascript
+  checked = $("#fullSwitch").is(":checked");
+  $("#full").css("display", checked ? "inline" : "none");
+
   $("#fullSwitch").change(function(){
   var checked = $(this).is(':checked')
     var fullSwitch = this;
