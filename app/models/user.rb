@@ -71,9 +71,9 @@ class User < ActiveRecord::Base
 
     copyright = directions['routes'].first['copyrights']
 
-    include ActionView::Helpers::SanitizeHelper
+    new_class = Class.new.extend ActionView::Helpers::SanitizeHelper
 
-    result = strip_tags(directions['routes'].first['legs'].map { |d| d['steps'] }.flatten.map { |d| d['html_instructions']}.join("\n"))
+    result = new_class.strip_tags(directions['routes'].first['legs'].map { |d| d['steps'] }.flatten.map { |d| d['html_instructions']}.join("\n"))
     result << copyright << "\n"
     result << "This information is highly experimental. Be careful!"
   end
