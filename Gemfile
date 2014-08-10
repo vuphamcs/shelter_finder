@@ -51,6 +51,7 @@ gem 'rqrcode'
 gem 'faraday'
 
 gem "d3-rails"
+gem 'font-awesome-rails'
 
 gem 'geocoder'
 

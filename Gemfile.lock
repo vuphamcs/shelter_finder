@@ -51,6 +51,8 @@ GEM
     execjs (2.2.1)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
+    font-awesome-rails (4.1.0.0)
+      railties (>= 3.2, < 5.0)
     foundation-rails (5.3.3.0)
       railties (>= 3.1.0)
       sass (>= 3.2.0)
@@ -172,6 +174,7 @@ DEPENDENCIES
   devise
   erb2haml
   faraday
+  font-awesome-rails
   foundation-rails
   foundation_rails_helper
   geocoder
