@@ -17,4 +17,8 @@
 //= require d3
 //= require_tree .
 
-$(function(){ $(document).foundation(); });
+$(function(){
+  $(document).foundation();
+  checked = $("#fullSwitch").is(":checked");
+  $("#full").css("display", checked ? "inline" : "none");
+});

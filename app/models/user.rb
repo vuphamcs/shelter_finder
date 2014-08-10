@@ -34,15 +34,16 @@ class User < ActiveRecord::Base
     auth_token = '76ba18f96eb764435e1d4922b91cf6e8'
 
     @client = Twilio::REST::Client.new account_sid, auth_token
-    
+
     guests = Guest.where(en_route_shelter_id: self.id)
 
     guests.each do |guest|
       @client.account.messages.create(
         :from => '+18572632905',
         :to => guest.phone_number,
-        :body => "We've reached full occupancy!\n Alternative(s): #{print_out_shelter_list(3)}"
+        :body => "We've reached full occupancy!\nAlternative(s):\n#{User.print_out_shelter_list(3)}"
       )
+      guest.update_attributes!(en_route_shelter_id: nil)
     end
   end
 
@@ -54,7 +55,7 @@ class User < ActiveRecord::Base
 
   def self.print_out_shelter_list(num) #use better scope than 'num' later on
     message = ""
-    
+
     where(full: false).first(num).each do |u|
       message << "ID: #{u.id} Name: #{u.name}\n"
     end

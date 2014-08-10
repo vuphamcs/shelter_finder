@@ -26,6 +26,9 @@ ActiveRecord::Schema.define(version: 20140810050809) do
     t.integer  "en_route_shelter_id"
   end
 
+  add_index "guests", ["en_route_shelter_id"], name: "index_guests_on_en_route_shelter_id"
+  add_index "guests", ["possible_shelter_id"], name: "index_guests_on_possible_shelter_id"
+
   create_table "users", force: true do |t|
     t.string   "name"
     t.string   "email"

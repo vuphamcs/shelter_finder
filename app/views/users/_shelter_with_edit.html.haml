@@ -1,21 +1,38 @@
 .shelter
   .row
     .large-4.columns
-      %h4= shelter.name
-    .large-8.columns
-      - if shelter.full
-        .alert.full-label FULL
-  .row
-    .large-12.columns Address: #{shelter.address}
-  .row
-    .large-3.columns Email: #{mail_to shelter.email}
-    .large-3.columns Phone: #{shelter.phone}
-    .large-6.columns
-  .row
-    .large-3.columns
-      .switch.radius
-        %input{id: "#{shelter.full}", type: "checkbox"}
-        %label{for: "#{shelter.full}"} Full
-  .row
-    .small-6.columns
-      %a.button.expand{href: "#{edit_user_path(@user)}"} Edit
+      .row
+        %h3
+          #{shelter.name}
+          .alert.full-label#full FULL
+      .row Address: #{shelter.address}
+      .row Phone: #{shelter.phone}
+      .row Email: #{shelter.email}
+      .row
+        Full:
+        =check_box_tag 'fullSwitch', 'full', shelter.full
+      .row
+        %a.button.expand{href: "#{printout_user_path(@user)}"} Printout
+    .large-8.columns.show-for-large-up
+      %a{href: gmap_link(shelter.address)}
+        %img{src: gmap(shelter.address)}
+
+:javascript
+  $("#fullSwitch").change(function(){
+  var checked = $(this).is(':checked')
+    var fullSwitch = this;
+    fullSwitch.disabled = true;
+    $.ajax({
+      type: "PUT",
+      url: "/users/#{shelter.id}",
+      data: {user:{full: checked}},
+      dataType: "json",
+      success: function(){
+      if(checked)
+        $("#full").show();
+      else
+        $("#full").hide();
+        fullSwitch.disabled = false;
+      }
+    })
+  });
