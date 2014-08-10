@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   resources :users do
     get :dashboard, on: :member
+    get :printout, on: :member
   end
 
   # match '/donate_success', to: 'users#donate_success'
