@@ -55,7 +55,11 @@ class TwilioController < ApplicationController
       end
 
     elsif message_body.starts_with?('directions')
-      message << User.google_directions(guest.address, guest.en_route_shelter)
+      if guest.address && guest.en_route_shelter
+        message << User.google_directions(guest.address, guest.en_route_shelter.address)
+      else
+        message << "Please specify a current address and an intent."
+      end
     else
       if guest.address
         message << "Send 'address' followed by your current address to change your current address.\nYour current address is #{guest.address}. Send 'shelters' to get a list of available shelters near you."
