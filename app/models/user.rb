@@ -75,13 +75,13 @@ class User < ActiveRecord::Base
       shelters_with_scores = shelters.each_with_index.map { |shelter, i| [[shelter, nil], Ranker.score(0, shelter.current_interest_level / 100, 0)] }
     end
 
-    shelters_with_scores.sort_by(&:second).map(&:first).last(num).reverse
+    shelters_with_scores.sort_by(&:second).map(&:first)
   end
 
   def self.print_out_shelter_list(guest = nil, num = 3) #use better scope than 'num' later on
     message = ""
 
-    sorted_shelters = ::User.sorted_shelters(guest.try(:address))
+    sorted_shelters = ::User.sorted_shelters(guest.try(:address)).last(num).reverse
 
     message << "List of nearby available shelters:\n"
 
