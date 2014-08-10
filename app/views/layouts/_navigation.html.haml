@@ -9,8 +9,14 @@
       %ul
         -if !(current_user && !devise_controller?)
           %li= link_to 'Register a shelter', new_user_registration_path
-          %li= link_to '(857) 263-2905', about_index_path
+          %li.has-dropdown
+            %a{src: '#'} About
+            %ul.dropdown
+              %li= link_to '(857) 263-2905', about_index_path
+              %li= link_to('Technologies', technologies_about_index_path)
+
+      %ul.right
         - if user_signed_in?
-          %li=link_to('Logout', destroy_user_session_path)
+          %li= link_to('Logout', destroy_user_session_path)
         - else
-          %li=link_to('Login', new_user_session_path)
+          %li= link_to('Login', new_user_session_path)

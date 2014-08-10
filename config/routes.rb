@@ -9,7 +9,9 @@ Rails.application.routes.draw do
     get :printout, on: :member
   end
 
-  resources :about
+  resources :about do
+    get :technologies, on: :collection
+  end
 
   # match '/donate_success', to: 'users#donate_success'
   resources :guests
