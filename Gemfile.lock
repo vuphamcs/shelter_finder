@@ -37,6 +37,8 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.7.1)
+    d3-rails (3.4.4)
+      railties (>= 3.1)
     devise (3.1.0)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -162,6 +164,7 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-rails (~> 4.0.0)
+  d3-rails
   devise
   erb2haml
   faraday

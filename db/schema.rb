@@ -21,9 +21,9 @@ ActiveRecord::Schema.define(version: 20140810073919) do
     t.string   "country"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "en_route"
+    t.boolean  "possible_shelter_id"
+    t.integer  "en_route"
     t.integer  "en_route_shelter_id"
-    t.integer  "possible_shelter_id"
     t.string   "address"
   end
 
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 20140810073919) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.integer  "size"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

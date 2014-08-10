@@ -4,8 +4,7 @@
       .row
         %h3
           #{shelter.name}
-          - if shelter.full
-            .alert.full-label FULL
+          .alert.full-label#full FULL
       .row Address: #{shelter.address}
       .row Phone: #{shelter.phone}
       .row Email: #{shelter.email}
@@ -13,10 +12,10 @@
         Full:
         =check_box_tag 'fullSwitch', 'full', shelter.full
       .row
+        %a.button.expand{href: "#{printout_user_path(@user)}"} Printout
     .large-8.columns.show-for-large-up
       %a{href: gmap_link(shelter.address)}
         %img{src: gmap(shelter.address)}
-
 
 :javascript
   $("#fullSwitch").change(function(){
@@ -29,6 +28,10 @@
       data: {user:{full: checked}},
       dataType: "json",
       success: function(){
+      if(checked)
+        $("#full").show();
+      else
+        $("#full").hide();
         fullSwitch.disabled = false;
       }
     })
