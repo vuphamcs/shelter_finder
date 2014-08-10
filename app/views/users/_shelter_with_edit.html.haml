@@ -17,9 +17,8 @@
         %strong Size:
         = shelter.size
       .row
-        Full:
-        =check_box_tag 'fullSwitch', 'full', shelter.full
-      .row.text-center
+        #fullSwitch.button.radius.small{data: {full: "#{shelter.full}"}}
+          = shelter.full ? 'Full' : 'Available'
         %a.button.success.radius.small{href: "#{printout_user_path(@user)}"} Printouts
     .large-3.columns.show-for-large-up
       %span.has-tip.tip-bottom.tip-top{class: "[tip-top tip-right] [radius round]", "data-options" => "disable_for_touch:true", "data-tooltip" => "", title: "#{shelter.current_interest_level_message}"}
@@ -29,24 +28,43 @@
         %img{src: gmap(shelter.address)}
 
 :javascript
-  checked = $("#fullSwitch").is(":checked");
-  $("#full").css("display", checked ? "inline" : "none");
-
-  $("#fullSwitch").change(function(){
-  var checked = $(this).is(':checked')
-    var fullSwitch = this;
-    fullSwitch.disabled = true;
-    $.ajax({
-      type: "PUT",
-      url: "/users/#{shelter.id}",
-      data: {user:{full: checked}},
-      dataType: "json",
-      success: function(){
-      if(checked)
-        $("#full").show();
-      else
-        $("#full").hide();
-        fullSwitch.disabled = false;
-      }
-    })
-  });
+  $(function()
+  {
+    if($("#fullSwitch").data('full'))
+    {
+      $("#fullSwitch").addClass('alert');
+    }
+    else
+    {
+      $("#fullSwitch").addClass('success');
+    }
+      $("#fullSwitch").click(function()
+      {
+        full = $("#fullSwitch").data("full");
+        data = {user:{full: !full}};
+        $.ajax(
+        {
+          type: "PUT",
+          url: "/users/#{shelter.id}",
+          data: data,
+          dataType: "json",
+          success: function()
+          {
+            if ($("#fullSwitch").data('full'))
+            {
+              $("#fullSwitch").data('full', false);
+              $("#fullSwitch").removeClass('alert');
+              $("#fullSwitch").addClass('success');
+              $("#fullSwitch").text('Available');
+            }
+            else
+            {
+              $("#fullSwitch").data('full', true);
+              $("#fullSwitch").addClass('alert');
+              $("#fullSwitch").removeClass('success');
+              $("#fullSwitch").text('Full');
+            }
+          }
+        });
+      });
+    });
