@@ -54,7 +54,7 @@ class TwilioController < ApplicationController
         end
       end
 
-    elsif message_body.begins_with?('directions')
+    elsif message_body.starts_with?('directions')
       message << User.google_directions(guest.address, guest.en_route_shelter)
     else
       if guest.address
