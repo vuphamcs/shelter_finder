@@ -16,8 +16,14 @@ class TwilioController < ApplicationController
       message << "Hello!\n"
     end
 
-    if message_body.starts_with?('thanks')
+    if message_body.starts_with?('thank')
       message << "You are important, we love to make your life easier."
+    elsif message_body.starts_with?('battlehack')
+      message << "Hack on brother/sister!"
+    elsif message_body.starts_with?('whatever')
+      message << "Indifference is the path to jealousy. Jealousy is the path to hate. Hate is the path to the dark side."
+    elsif message_body.starts_with?('kudos')
+      message << "http://isitbeertimefor.us"
     elsif message_body.starts_with?('address')
       guest.address = message_body[7..-1]
       guest.save!
