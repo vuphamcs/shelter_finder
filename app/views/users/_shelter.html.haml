@@ -2,14 +2,22 @@
   .row
     .large-4.columns
       .row
-        %h3
+        %h2
           #{shelter.name}
           - if shelter.full
             .alert.full-label FULL
-      .row Address: #{shelter.address}
-      .row Phone: #{shelter.phone}
-      .row Email: #{shelter.email}
-      .row Size: #{shelter.size}
+      .row
+        %strong Address:
+        = shelter.address
+      .row
+        %strong Phone:
+        = shelter.phone
+      .row
+        %strong Email:
+        = shelter.email
+      .row
+        %strong Size:
+        = shelter.size
       .row
         .donate-button
           :plain
@@ -24,5 +32,3 @@
     .large-3.columns.show-for-large-up
       %a{href: gmap_link(shelter.address), target: '_blank'}
         %img{src: gmap(shelter.address)}
-
-

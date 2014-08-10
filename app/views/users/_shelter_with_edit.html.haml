@@ -2,20 +2,30 @@
   .row
     .large-4.columns
       .row
-        %h3
+        %h2
           #{shelter.name}
-          .alert.full-label#full FULL
-      .row Address: #{shelter.address}
-      .row Phone: #{shelter.phone}
-      .row Email: #{shelter.email}
-      .row Size: #{shelter.size}
+      .row
+        %strong Address:
+        = shelter.address
+      .row
+        %strong Phone:
+        = shelter.phone
+      .row
+        %strong Email:
+        = shelter.email
+      .row
+        %strong Size:
+        = shelter.size
       .row
         Full:
         =check_box_tag 'fullSwitch', 'full', shelter.full
-      .row
-        %a.button.success.radius.small{href: "#{printout_user_path(@user)}"} Printout
-    .large-8.columns.show-for-large-up
-      %a{href: gmap_link(shelter.address), target: '_blank'}
+      .row.text-center
+        %a.button.success.radius.small{href: "#{printout_user_path(@user)}"} Printouts
+    .large-3.columns.show-for-large-up
+      %span.has-tip.tip-bottom.tip-top{class: "[tip-top tip-right] [radius round]", "data-options" => "disable_for_touch:true", "data-tooltip" => "", title: "#{shelter.current_interest_level_message}"}
+        .interest_level{data: {interest_percentage: shelter.current_interest_level}}
+    .large-5.columns.show-for-large-up
+      %a{href: gmap_link(shelter.address)}
         %img{src: gmap(shelter.address)}
 
 :javascript

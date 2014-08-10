@@ -79,12 +79,15 @@ class User < ActiveRecord::Base
 
     sorted_shelters = shelters_with_scores.sort_by(&:second).map(&:first).last(num).reverse
 
+    message << "List of nearby available shelters:\n"
+
     sorted_shelters.each do |pair|
       u = pair.first
       distance = pair.second
 
-      message << "ID: #{u.id} Name: #{u.name}\n"
-      message << "Distance: #{distance['text']}\n" unless distance.nil?
+      message << "{u.name}\n"
+      message << "Distance: #{distance['text']} " unless distance.nil?
+      message << "ID: #{u.id} Name:"
     end
 
     message
