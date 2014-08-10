@@ -66,23 +66,25 @@ class User < ActiveRecord::Base
   def self.print_out_shelter_list(guest = nil, num = 3) #use better scope than 'num' later on
     message = ""
 
-    shelters = where(full: false).all
-
-    if guest_address = guest.try(:address)
-      distances = google_distances(guest_address, shelters.map(&:address))
-    else
-      distances = shelters.map { |_| 0 }
-    end
+    shelters = ::User.where(full: false).all
 
     require 'ranker'
 
-    shelters_with_scores = shelters.each_with_index.map { |shelter, i| [shelter, Ranker.score(0, shelter.current_interest_level / 100, distances[i]['value'].to_i)] }
+    if guest_address = guest.try(:address)
+      distances = ::User.google_distances(guest_address, shelters.map(&:address))
+      shelters_with_scores = shelters.each_with_index.map { |shelter, i| [[shelter, distances[i]], Ranker.score(0, shelter.current_interest_level / 100, distances[i]['value'].to_i)] }
+    else
+      shelters_with_scores = shelters.each_with_index.map { |shelter, i| [[shelter, nil], Ranker.score(0, shelter.current_interest_level / 100, 0)] }
+    end
 
-    sorted_shelters = shelters_with_scores.sort_by(&:second).map(&:first).last(num)
+    sorted_shelters = shelters_with_scores.sort_by(&:second).map(&:first).last(num).reverse
 
-    sorted_shelters.each do |u|
+    sorted_shelters.each do |pair|
+      u = pair.first
+      distance = pair.second
+
       message << "ID: #{u.id} Name: #{u.name}\n"
-      message << "Distance: #{distances[i]['text']}\n" unless distances[i] == 0
+      message << "Distance: #{distance['text']}\n" unless distance.nil?
     end
 
     message
