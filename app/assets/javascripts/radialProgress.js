@@ -29,7 +29,7 @@ function radialProgress(parent) {
         _selection,
         _margin = {top:0, right:0, bottom:30, left:0},
         __width = 300,
-        __height = 300,
+        __height = 230,
         _diameter,
         _label="",
         _fontSize=10;
