@@ -56,7 +56,7 @@ class TwilioController < ApplicationController
 
     else
       if guest.address
-        message << "Send 'address' followed by your current address to find shelters near you.\nYour current address is #{guest.address}. Send 'shelters to get a list of available shelters near you."
+        message << "Send 'address' followed by your current address to change your current address.\nYour current address is #{guest.address}. Send 'shelters' to get a list of available shelters near you."
       else
         message << "Send 'address' followed by your current address to find shelters near you\ne.g. address 12 Coral Street, Boston MA, 02121. Send 'shelters' to get a list of available shelters."
       end
